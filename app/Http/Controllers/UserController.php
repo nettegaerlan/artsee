@@ -25,6 +25,27 @@ class UserController extends Controller
 
     }
 
+    public function savedCollection($id){
+        $user_id = Auth::user()->id;
+        $article_id = $id;
+        $article = Article::find($id);
+
+        //TODO: 
+        //set up the relation between user and book via the book_user_table
+
+        $article->ownedBy()->attach($user_id); 
+        return redirect()->back();
+    }
+
+    public function unsaveCollection($id, $userid){
+        $article = Article::find($id);
+        $user = Auth::user()->id;
+
+        $article->ownedBy()->detach($userid); 
+         return redirect()->back();
+
+    }
+
     public function editReview($id, Request $request ){
         DB::table("reviews")->where("id", $id)->update(["review"=>$request->review]);
         return redirect()->back();
@@ -44,17 +65,7 @@ class UserController extends Controller
         return redirect()->back();
     }
 
-	public function savedCollection($id){
-	    $user_id = Auth::user()->id;
-	    $article_id = $id;
-	    $article = Article::find($id);
-
-	    //TODO: 
-	    //set up the relation between user and book via the book_user_table
-
-	    $article->ownedBy()->attach($user_id); 
-	    return redirect("/catalog/article/$id");
-	}
+	
     
     public function showCollection(){
         return view('saved_articles');

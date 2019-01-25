@@ -32,8 +32,9 @@ Route::middleware("user")->group(function() {
 	Route::patch('/catalog/editreview/{id}','UserController@editReview');
 
 	Route::get('/catalog/deletereview/{articleid}/{reviewid}','UserController@deleteReview');
+	Route::get('/catalog/unsave_articles/{id}/{userid}','UserController@unsaveCollection');
 
-	Route::get('/catalog/saved_article/{id}','UserController@showCollection');
+	Route::get('/catalog/saved_article/{id}','UserController@savedCollection');
 	Route::get('/saved_articles','UserController@showCollection');
 	Route::patch('/edit_profile/{id}','UserController@editUserProfile');
 

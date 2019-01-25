@@ -19,7 +19,7 @@
 				<tr><td>{{$article->title}}</td>
 					<td>{{$article->created_at->format('m/d/Y')}}</td>
 					<td><a href="/catalog/article/{{$article->id}}">View</a></td>
-					<td><a href="">Unsave</a></td>
+					<td><a href="/catalog/unsave_articles/{{$article->id}}/{{Auth::user()->id}}">Unsave</a></td>
 				</tr>
 				
 			@endforeach
