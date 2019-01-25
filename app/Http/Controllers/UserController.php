@@ -55,12 +55,8 @@ class UserController extends Controller
 	    $article->ownedBy()->attach($user_id); 
 	    return redirect("/catalog/article/$id");
 	}
-
-
     
-    public function showCollection($id){
-            $article_user = ArticleUser::find($id)
-
+    public function showCollection(){
         return view('saved_articles');
     }
 
