@@ -24,6 +24,7 @@ Route::get('/catalog','GeneralController@showArticles');
 Route::get('/catalog/article/{id}','GeneralController@viewArticle');
 
 
+
 /*================ USERS ================*/
 Route::middleware("user")->group(function() {
 	Route::get('/profile','UserController@showProfile');
@@ -37,7 +38,8 @@ Route::middleware("user")->group(function() {
 
 	Route::get('/catalog/saved_article/{id}','UserController@showCollection');
 	Route::get('/saved_articles','UserController@showCollection');
-	Route::get('/edit_profile','UserController@showCollection');
+	Route::patch('/edit_profile/{id}','UserController@editUserProfile');
+
 
 
 
@@ -71,7 +73,7 @@ Route::middleware("admin")->group(function() {
 
 /*================ AUTH ================*/
 Route::middleware("auth")->group(function() {
-	Route::get('/profile', 'GeneralController@showProfilePage');
+	
 });
 
 

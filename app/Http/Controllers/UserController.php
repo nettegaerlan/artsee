@@ -58,4 +58,40 @@ class UserController extends Controller
     public function showCollection(){
         return view('saved_articles');
     }
+
+     public function showProfile() {
+       return view('profile');
+    }
+
+    public function editUserProfile($id, Request $request){
+       $user = User::find($id);
+        $rules = array(
+            "firstname"=>"required",
+            "lastname"=>"required",
+            "username"=>"required",
+            
+            "email"=>"required",
+            "password"=>"required",
+            'profile_image'=>"required|image|mimes:jpeg,png,jpg,gif,svg|max:2048"
+        );
+
+        $this->validate($request, $rules);
+
+        $user->firstname = $request->firstname;
+        $user->lastname = $request->lastname;
+        $user->username = $request->username;
+        $user->email = $request->email;
+        $user->password = $request->password;
+        if($request->file("profile_image")!=null){
+            $image= $request->file("profile_image");
+            $image_name = time().".".$image->getClientOriginalExtension();
+            $destination = "images/";
+            $image->move($destination, $image_name);
+            $article->image_cover = $destination.$image_name;
+        }
+        $article->save();
+        Session::flash("message","Profile Edited Successfully!");
+            return redirect("/profile");
+     }
+
 }

@@ -20,11 +20,6 @@ class GeneralController extends Controller
     	return $articles;
     }
 
-
-    public function showProfilePage() {
-    	return view("profile");
-    }
-
     public function viewArticle($id){
     	$article = Article::find($id);
     	return view("article_view",compact("article"));
