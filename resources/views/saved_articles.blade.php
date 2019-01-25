@@ -11,13 +11,13 @@
 	<table class="table table-striped">
 		<thead>
 			<th>Article</th>
-			<th>Content</th>
+			<th>Date Added</th>
 			<th>Action</th>
 		</thead>
 		<tbody>
 			@foreach(Auth::user()->owns as $article)
 				<tr><td>{{$article->title}}</td>
-					<td><?php echo $article->content?></td>
+					<td>{{$article->created_at->format('m/d/Y')}}</td>
 					<td><a href="/catalog/article/{{$article->id}}">View</a></td>
 					<td><a href="">Unsave</a></td>
 				</tr>

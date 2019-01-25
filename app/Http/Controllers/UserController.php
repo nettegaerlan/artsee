@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use \App\Article;
 use Auth;
+use DB;
 
 class UserController extends Controller
 {
@@ -54,8 +55,12 @@ class UserController extends Controller
 	    $article->ownedBy()->attach($user_id); 
 	    return redirect("/catalog/article/$id");
 	}
+
+
     
-    public function showCollection(){
+    public function showCollection($id){
+            $article_user = ArticleUser::find($id)
+
         return view('saved_articles');
     }
 
@@ -69,7 +74,7 @@ class UserController extends Controller
             "firstname"=>"required",
             "lastname"=>"required",
             "username"=>"required",
-            
+
             "email"=>"required",
             "password"=>"required",
             'profile_image'=>"required|image|mimes:jpeg,png,jpg,gif,svg|max:2048"

@@ -28,11 +28,8 @@ Route::get('/catalog/article/{id}','GeneralController@viewArticle');
 /*================ USERS ================*/
 Route::middleware("user")->group(function() {
 	Route::get('/profile','UserController@showProfile');
-
 	Route::post('/catalog/{id}/addReview','UserController@addReview');
-
-	Route::patch('/catalog/editreview/{
-		id}','UserController@editReview');
+	Route::patch('/catalog/editreview/{id}','UserController@editReview');
 
 	Route::get('/catalog/deletereview/{articleid}/{reviewid}','UserController@deleteReview');
 
